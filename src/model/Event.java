@@ -47,13 +47,13 @@ public class Event {
     public boolean isAvailable (SeatType type) {
         switch (type) {
             case disabled -> {
-                return this.disabledSeats.isEmpty();
+                return !this.disabledSeats.isEmpty();
             }
             case exclusive -> {
-                return this.exclusiveSeats.isEmpty();
+                return (!this.exclusiveSeats.isEmpty()) || (!this.normalSeats.isEmpty());
             }
             case normal -> {
-                return this.normalSeats.isEmpty();
+                return !this.normalSeats.isEmpty();
             }
             default -> {
                 return false;

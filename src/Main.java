@@ -77,6 +77,8 @@ public class Main {
                 case "buyTicket" -> {
                     System.out.println("Event id: ");
                     int eventId = scanner.nextInt();
+                    scanner.nextLine();
+
                     Event event  = ticketingService.lookupEvent(eventId);
                     if (event != null) {
                         if (event.isAvailable(user.getSeatType())) {
@@ -162,6 +164,7 @@ public class Main {
                 case "login": {
                     System.out.println("LOGGING IN CLIENT. PLEASE ENTER CLIENT id:");
                     int id = scanner.nextInt();
+                    scanner.nextLine();
 
                     Client client = ticketingService.lookupClient(id);
                     if (client == null || client.getSeatType() == SeatType.normal) {
@@ -177,6 +180,7 @@ public class Main {
                 case "retrieveTicket": {
                     System.out.println("PLEASE ENTER TICKET id:");
                     int id = scanner.nextInt();
+                    scanner.nextLine();
                     Ticket ticket = ticketingService.lookupTicket(id);
 
                     if (ticket != null) {
@@ -189,6 +193,7 @@ public class Main {
                 case "cancelTicket": {
                     System.out.println("Ticket id to cancel: ");
                     int id = scanner.nextInt();
+                    scanner.nextLine();
 
                     ticketingService.cancelTicket(id);
                 }
