@@ -18,9 +18,8 @@ public class QrGenerator {
     Map <String, String> map = new HashMap<String, String>();
     String defaultPath;
 
-    public QrGenerator(String defaultPath) {
-        this.defaultPath = defaultPath;
-    }
+    public QrGenerator() {
+        this.defaultPath = System.getProperty("user.dir") + File.separator + "qrcodes";    }
 
     public String generateQr(Ticket ticket)
             throws WriterException, IOException

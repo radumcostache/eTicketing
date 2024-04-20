@@ -9,10 +9,10 @@ import repository.TicketRepository;
 import java.io.IOException;
 
 public class TicketingService {
-    private ClientRepository clientRepository;
-    private EventRepository eventRepository;
+    private final ClientRepository clientRepository;
+    private final EventRepository eventRepository;
     private TicketRepository ticketRepository;
-    private QrGenerator qr = new QrGenerator("/qrcodes");
+    private QrGenerator qr = new QrGenerator();
 
     public TicketingService() {
         this.clientRepository = new ClientRepository();
