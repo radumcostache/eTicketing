@@ -38,6 +38,13 @@ The following functionalities can be accessed through command line:
 * Print list of events
 * Lookup event
 
+## Database
+
+The project uses JDBC with Apache Derby Embedded database
+The demo database is located inside the folder TicketingDB, and can be accessed with the following credentials:
+
+* User: agent
+* Password: agent
 
 
 
