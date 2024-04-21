@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Stack;
 
 public class Event {
-    private static int ID_GENERATOR = 0;
     private int id;
     private String name;
     private String description;
@@ -21,9 +20,9 @@ public class Event {
     Stack <Seat> exclusiveSeats;
     Stack <Seat> normalSeats;
 
-    public Event(Location location, String name, String description, Organizer organizer,
+    public Event(int id, Location location, String name, String description, Organizer organizer,
                  Date startDate, Date endDate, double seatPrice) {
-        this.id = ID_GENERATOR++;
+        this.id = id;
         this.location = location;
         this.name = name;
         this.description = description;
@@ -34,12 +33,6 @@ public class Event {
         this.disabledSeats = new Stack<Seat>();
         this.exclusiveSeats = new Stack<Seat>();
         this.normalSeats = new Stack<Seat>();
-
-
-        for (Seat seat : location.getSeats()) {
-            Seat newSeat = new Seat(seat);
-            this.addSeat(newSeat);
-        }
 
         this.seatPrice = seatPrice;
     }

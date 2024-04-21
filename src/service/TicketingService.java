@@ -31,9 +31,9 @@ public class TicketingService {
     public Client lookupClient(int clientId) {
         return clientRepository.lookupClient(clientId);
     }
-    public void addEvent(Event event) {
-        eventRepository.add(event);
-    }
+//    public void addEvent(Event event) {
+//        eventRepository.add(event);
+//    }
 
     public void generateQrCode(Ticket ticket) {
         try{

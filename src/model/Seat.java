@@ -3,7 +3,7 @@ package model;
 ;
 public class Seat {
 
-
+    private int id;
     private int seatNumber;
     private SeatType seatType;
 
@@ -12,7 +12,8 @@ public class Seat {
     }
 
 
-    public Seat(int seatNumber, SeatType seatType) {
+    public Seat(int id, int seatNumber, SeatType seatType) {
+        this.id = id;
         this.seatNumber = seatNumber;
         this.seatType = seatType;
     }

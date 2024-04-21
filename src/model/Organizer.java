@@ -1,10 +1,12 @@
 package model;
 
 public class Organizer {
-    public String name;
-    public String address;
+    private int id;
+    private String name;
+    private String address;
 
-    public Organizer(String name, String address) {
+    public Organizer(int id, String name, String address) {
+        this.id = id;
         this.name = name;
         this.address = address;
     }
