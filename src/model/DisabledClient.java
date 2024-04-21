@@ -1,8 +1,8 @@
 package model;
 
 public class DisabledClient extends Client {
-    public DisabledClient(String name, String phone, String email) {
-        super(name, phone, email);
+    public DisabledClient(int id, String name, String phone, String email) {
+        super(id, name, phone, email);
     }
 
     @Override

@@ -4,8 +4,6 @@ package model;
 import java.util.Vector;
 
 public abstract class Client {
-    public static int ID_GENERATOR = 0;
-
     public int getId() {
         return id;
     }
@@ -16,12 +14,8 @@ public abstract class Client {
     private String phone;
     private String email;
 
-    private Vector<Ticket> tickets = new Vector<>();
-
-    protected Client(String name, String phone, String email) {
-        this.id = ID_GENERATOR;
-        ID_GENERATOR++;
-
+    protected Client(int id, String name, String phone, String email) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;

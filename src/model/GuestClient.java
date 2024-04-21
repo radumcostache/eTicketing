@@ -2,8 +2,8 @@ package model;
 
 public class GuestClient extends Client {
 
-    public GuestClient(String name, String phone, String email) {
-        super(name, phone, email);
+    public GuestClient(int id, String name, String phone, String email) {
+        super(id, name, phone, email);
     }
 
     @Override

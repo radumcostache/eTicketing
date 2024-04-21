@@ -7,21 +7,25 @@ import repository.EventRepository;
 import repository.TicketRepository;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class TicketingService {
     private final ClientRepository clientRepository;
     private final EventRepository eventRepository;
-    private TicketRepository ticketRepository;
-    private QrGenerator qr = new QrGenerator();
+    private final TicketRepository ticketRepository;
 
-    public TicketingService() {
-        this.clientRepository = new ClientRepository();
-        this.eventRepository = new EventRepository();
-        this.ticketRepository = new TicketRepository();
+    Connection db;
+    private final QrGenerator qr = new QrGenerator();
+
+    public TicketingService(Connection db) {
+        this.db = db;
+        this.clientRepository = new ClientRepository(db);
+        this.eventRepository = new EventRepository(db);
+        this.ticketRepository = new TicketRepository(db);
     }
 
-    public void addClient(Client client) {
-        clientRepository.addClient(client);
+    public int addClient(String name, String email, String phone, String userType) {
+        return clientRepository.addClient(name, email, phone, userType);
     }
 
     public Client lookupClient(int clientId) {
@@ -78,8 +82,5 @@ public class TicketingService {
     public Event lookupEvent(int eventId) {
         return eventRepository.lookupEvent(eventId);
     }
-
-
-
 
 }

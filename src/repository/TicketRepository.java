@@ -2,12 +2,19 @@ package repository;
 
 import model.*;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Vector;
 
 public class TicketRepository
 {
     private Vector<Ticket> tickets = new Vector<Ticket>();
     private Vector<HistoricalTicket> historicalTickets = new Vector<HistoricalTicket>();
+    Connection db;
+
+    public TicketRepository(Connection db) {
+        this.db = db;
+    }
 
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);

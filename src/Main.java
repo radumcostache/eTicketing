@@ -1,15 +1,48 @@
 import model.*;
 import service.TicketingService;
 
+import java.io.File;
+import java.sql.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-    static private TicketingService ticketingService = new TicketingService();
+    private static String dbPath = System.getProperty("user.dir") + File.separator + "TicketingDB";
+    private static String connectionString = "jdbc:derby:" + dbPath + ";create=true";
+
+    private static Connection connection;
+    static private TicketingService ticketingService;
     static private Scanner scanner = new Scanner(System.in);
 
     private static void init() {
+        try {
+            connection = DriverManager.getConnection(connectionString);
+            connection.setAutoCommit(false);
+            connection.setSchema("AGENT");
+
+            // DEBUG statement
+            //print content of organizers
+//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ORGANIZERS");
+//            ResultSet resultSet = statement.executeQuery();
+
+//            ResultSetMetaData rsmd = resultSet.getMetaData();
+//            int columnsNumber = rsmd.getColumnCount();
+//            while (resultSet.next()) {
+//                for (int i = 1; i <= columnsNumber; i++) {
+//                    if (i > 1) System.out.print(",  ");
+//                    String columnValue = resultSet.getString(i);
+//                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+//                }
+//                System.out.println("");
+//            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ticketingService = new TicketingService(connection);
+
         Organizer organizer = new Organizer("BestEvents", "Calea Victoriei");
         Location salaPalatului = new Location("Sala Palatului", "Calea Victoriei");
         Location areneleRomane = new Location("Arenele Romane", "Parcul Carol I");
@@ -129,10 +162,10 @@ public class Main {
                     System.out.println("Phone: ");
                     String phone = scanner.nextLine().trim();
 
-                    Client newClient = new RegisteredClient(name, phone, email);
-                    ticketingService.addClient(newClient);
+//                    Client newClient = new RegisteredClient(name, phone, email);
+                    ticketingService.addClient(name, email, phone, "registered");
 
-                    System.out.println("Successfully added client!!!\n Client id: " + newClient.getId());
+                    System.out.println("Successfully added client!!!");
 
                     break;
                 }
@@ -145,18 +178,20 @@ public class Main {
                     System.out.println("Phone: ");
                     String phone = scanner.nextLine().trim();
 
-                    Client newClient = new DisabledClient(name, phone, email);
-                    ticketingService.addClient(newClient);
+//                    Client newClient = new DisabledClient(name, phone, email);
+                    ticketingService.addClient(name, email, phone, "disabled");
 
-                    System.out.println("Successfully added disabled client!!!\n Client id: " + newClient.getId());
+                    System.out.println("Successfully added disabled client!!!\n");
                     break;
                 }
                 case "loginGuest": {
                     System.out.println("LOGGING IN A GUEST USER.\n Please enter name");
                     String name = scanner.nextLine().trim();
 
-                    Client client = new GuestClient(name, "guest client", "guest client");
-                    ticketingService.addClient(client);
+//                    Client client = new GuestClient(name, "guest client", "guest client");
+
+                    int id = ticketingService.addClient(name, "guest", "guest", "guest");
+                    Client client = ticketingService.lookupClient(id);
 
                     login(client);
                     break;

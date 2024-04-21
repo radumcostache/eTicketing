@@ -2,12 +2,16 @@ package repository;
 
 import model.Event;
 
+import java.sql.Connection;
 import java.util.Vector;
 
 public class EventRepository {
 
     Vector <Event> events = new Vector <Event> ();
-    public EventRepository() {}
+    Connection db;
+    public EventRepository(Connection db) {
+        this.db = db;
+    }
     public void add(Event event) {
         events.add(event);
     }
