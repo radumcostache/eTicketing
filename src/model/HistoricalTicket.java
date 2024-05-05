@@ -3,8 +3,8 @@ import java.util.Date;
 
 public class HistoricalTicket extends Ticket {
     public Date cancellationDate;
-    HistoricalTicket(Event event, Client client, Seat seat) {
-        super(event, client, seat);
+    HistoricalTicket(int id, Event event, Client client, Seat seat) {
+        super(id, event, client, seat);
         // current date as cancellation date
         this.cancellationDate = new Date();
     }

@@ -27,4 +27,8 @@ public class RegisteredClient extends Client {
         nrPoints = (int) (EARNED_POINTS_DOLLAR * spentSum);
 
     }
+    @Override
+    public int getNrPoints() {
+        return nrPoints;
+    }
 }

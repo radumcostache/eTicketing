@@ -29,5 +29,7 @@ public abstract class Client {
     public abstract SeatType getSeatType();
     public abstract double getTicketPrice(double basePrice);
     public abstract void buyTicket(double basePrice);
-
+    public int getNrPoints() {
+        return 0;
+    }
 }

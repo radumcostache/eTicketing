@@ -50,20 +50,21 @@ public class EventRepository {
          // get all events from the database into a Vector of events
         Vector<Event> events = new Vector<>();
         try {
-            PreparedStatement stmt = db.prepareStatement("SELECT e.id AS eventId," +
-                    "       e.name AS eventName," +
-                    "       description AS evenetDescription," +
-                    "       locationId," +
-                    "       l.name AS locationName," +
-                    "       l.address AS locationAddress," +
-                    "       organizerId," +
-                    "       o.name AS organizerName," +
-                    "       o.address AS organizerAddress," +
-                    "       startDate," +
-                    "       endDate," +
-                    "       seatPrice\n" +
-                    "FROM events e JOIN locations l ON (e.locationId = l.id)\n" +
-                    "              JOIN organizers o ON (e.organizerId = o.Id)" );
+            PreparedStatement stmt = db.prepareStatement("""
+                    SELECT e.id AS eventId,\
+                           e.name AS eventName,\
+                           description AS eventDescription,\
+                           locationId,\
+                           l.name AS locationName,\
+                           l.address AS locationAddress,\
+                           organizerId,\
+                           o.name AS organizerName,\
+                           o.address AS organizerAddress,\
+                           startDate,\
+                           endDate,\
+                           seatPrice
+                    FROM events e JOIN locations l ON (e.locationId = l.id)
+                                  JOIN organizers o ON (e.organizerId = o.Id)""");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Event event = reconstructEvent(rs);
@@ -111,7 +112,7 @@ public class EventRepository {
         try {
             PreparedStatement stmt = db.prepareStatement("SELECT e.id AS eventId," +
                     "       e.name AS eventName," +
-                    "       description AS evenetDescription," +
+                    "       description AS eventDescription," +
                     "       locationId," +
                     "       l.name AS locationName," +
                     "       l.address AS locationAddress," +
@@ -120,10 +121,10 @@ public class EventRepository {
                     "       o.address AS organizerAddress," +
                     "       startDate," +
                     "       endDate," +
-                    "       seatPrice" +
+                    "       seatPrice " +
                     "FROM events e JOIN locations l ON (e.locationId = l.id)" +
                     "              JOIN organizers o ON (e.organizerId = o.Id)" +
-                    "WHERE e.eventId = " + eventId );
+                    "WHERE e.Id = " + eventId );
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 event = reconstructEvent(rs);

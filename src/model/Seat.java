@@ -26,4 +26,8 @@ public class Seat {
     public SeatType getSeatType() {
         return seatType;
     }
+
+    public int getId() {
+        return id;
+    }
 }
