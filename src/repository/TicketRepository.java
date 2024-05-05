@@ -72,7 +72,7 @@ public class TicketRepository
         Ticket ticket = null;
         try {
             PreparedStatement stmt = db.prepareStatement("SELECT id, SEATID, CLIENTID" +
-                    "FROM TICKETS WHERE id = " + ticketId);
+                    " FROM TICKETS WHERE id = " + ticketId);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

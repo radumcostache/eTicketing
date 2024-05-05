@@ -93,11 +93,11 @@ public class EventRepository {
                 int seatNumber = rs.getInt("seatNumber");
                 String seatTypeString = rs.getString("seatType");
                 SeatType seatType = null;
-                switch (seatTypeString) {
-                    case "exclusive": seatType = SeatType.exclusive;
-                    case "normal": seatType = SeatType.normal;
-                    default: seatType = SeatType.disabled;
-                }
+                seatType = switch (seatTypeString) {
+                    case "exclusive" -> SeatType.exclusive;
+                    case "normal" -> SeatType.normal;
+                    default -> SeatType.disabled;
+                };
 
                 Seat seat = new Seat(seatId, seatNumber, seatType);
                 event.addSeat(seat);
