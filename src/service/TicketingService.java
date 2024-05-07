@@ -21,7 +21,7 @@ public class TicketingService {
         this.db = db;
         this.clientRepository = new ClientRepository(db);
         this.eventRepository = new EventRepository(db);
-        this.ticketRepository = new TicketRepository(db);
+        this.ticketRepository = new TicketRepository(db, clientRepository, eventRepository);
     }
 
     public int addClient(String name, String email, String phone, String userType) {
@@ -31,9 +31,9 @@ public class TicketingService {
     public Client lookupClient(int clientId) {
         return clientRepository.lookupClient(clientId);
     }
-    public void addEvent(Event event) {
-        eventRepository.add(event);
-    }
+//    public void addEvent(Event event) {
+//        eventRepository.add(event);
+//    }
 
     public void generateQrCode(Ticket ticket) {
         try{
@@ -53,12 +53,13 @@ public class TicketingService {
             return null;
         }
 
-        Ticket generatedTicket = new Ticket(event, client, assignedSeat);
-        ticketRepository.addTicket(generatedTicket);
+//        Ticket generatedTicket = new Ticket(event, client, assignedSeat);
+        Ticket generatedTicket = ticketRepository.addTicket(event, client, assignedSeat);
 
         client.buyTicket(event.getSeatPrice());
-        generateQrCode(generatedTicket);
+        clientRepository.updateClient(client);
 
+        generateQrCode(generatedTicket);
         return generatedTicket;
     }
     public Ticket lookupTicket(int ticketId) {

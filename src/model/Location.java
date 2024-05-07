@@ -3,6 +3,7 @@ package model;
 import java.util.Vector;
 
 public class Location {
+    private int id;
 
     private String name;
     private String address;
@@ -13,8 +14,8 @@ public class Location {
 
     Vector <Seat> seats;
 
-    public Location(String name, String address) {
-
+    public Location(int id, String name, String address) {
+        this.id = id;
         this.name = name.trim();
         this.address = address.trim();
         this.seats = new Vector<>();
