@@ -1,5 +1,7 @@
 import model.*;
+import service.CSVService;
 import service.TicketingService;
+
 
 import java.io.File;
 import java.sql.*;
@@ -15,11 +17,15 @@ public class Main {
     static private TicketingService ticketingService;
     static private Scanner scanner = new Scanner(System.in);
 
+    private static CSVService csvService;
+
     private static void init() {
         try {
             connection = DriverManager.getConnection(connectionString);
             connection.setAutoCommit(false);
             connection.setSchema("AGENT");
+
+            csvService = new CSVService("audit.csv");
 
             // DEBUG statement
             //print content of organizers
@@ -106,8 +112,12 @@ public class Main {
 
             String option = scanner.nextLine().trim();
             switch (option) {
-                case "retrieveTickets" -> ticketingService.printClientTickets(user);
+                case "retrieveTickets" -> {
+                    csvService.printAction("retrieveUserTickets");
+                    ticketingService.printClientTickets(user);
+                }
                 case "buyTicket" -> {
+                    csvService.printAction("buyTicket");
                     System.out.println("Event id: ");
                     int eventId = scanner.nextInt();
                     scanner.nextLine();
@@ -154,6 +164,7 @@ public class Main {
 
             switch (choice) {
                 case "registerClient": {
+                    csvService.printAction("registerClient");
                     System.out.println("*****REGISTER CLIENT MENU*****");
                     System.out.println("Name: ");
                     String name = scanner.nextLine().trim();
@@ -170,6 +181,7 @@ public class Main {
                     break;
                 }
                 case "registerDisabled": {
+                    csvService.printAction("registerDisabled");
                     System.out.println("*****REGISTER DISABLED CLIENT MENU*****");
                     System.out.println("Name: ");
                     String name = scanner.nextLine().trim();
@@ -193,6 +205,7 @@ public class Main {
                     int id = ticketingService.addClient(name, "guest", "guest", "guest");
                     Client client = ticketingService.lookupClient(id);
 
+                    csvService.printAction("loginGuestClient");
                     login(client);
                     break;
                 }
@@ -201,6 +214,7 @@ public class Main {
                     int id = scanner.nextInt();
                     scanner.nextLine();
 
+                    csvService.printAction("loginClient");
                     Client client = ticketingService.lookupClient(id);
                     if (client == null || client.getSeatType() == SeatType.normal) {
                         System.out.println("INVALID CLIENT ID");
@@ -211,6 +225,7 @@ public class Main {
                 }
                 case "showEvents":
                     ticketingService.printEvents();
+                    csvService.printAction("listEvents");
                     break;
                 case "retrieveTicket": {
                     System.out.println("PLEASE ENTER TICKET id:");
@@ -219,6 +234,7 @@ public class Main {
                     Ticket ticket = ticketingService.lookupTicket(id);
 
                     if (ticket != null) {
+                        csvService.printAction("lookupTicket");
                         ticketingService.printTicketInfo(ticket);
                     } else {
                         System.out.println("ERROR: TICKET NOT FOUND!!!");
@@ -230,6 +246,7 @@ public class Main {
                     int id = scanner.nextInt();
                     scanner.nextLine();
 
+                    csvService.printAction("cancelTicket");
                     ticketingService.cancelTicket(id);
                 }
                 case "exit":

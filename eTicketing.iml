@@ -10,5 +10,6 @@
     <orderEntry type="library" name="google.zxing.core" level="project" />
     <orderEntry type="library" name="google.zxing.javase" level="project" />
     <orderEntry type="library" name="apache.derby" level="project" />
+    <orderEntry type="library" name="opencsv" level="project" />
   </component>
 </module>
