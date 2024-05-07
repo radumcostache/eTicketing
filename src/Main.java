@@ -49,45 +49,45 @@ public class Main {
 
         ticketingService = new TicketingService(connection);
 
-        Organizer organizer = new Organizer("BestEvents", "Calea Victoriei");
-        Location salaPalatului = new Location("Sala Palatului", "Calea Victoriei");
-        Location areneleRomane = new Location("Arenele Romane", "Parcul Carol I");
+//        Organizer organizer = new Organizer("BestEvents", "Calea Victoriei");
+//        Location salaPalatului = new Location("Sala Palatului", "Calea Victoriei");
+//        Location areneleRomane = new Location("Arenele Romane", "Parcul Carol I");
 
-        int i;
-        for (i = 1; i <= 100; ++i) {
-            Seat seat = new Seat(i, SeatType.normal);
-            salaPalatului.addSeat(seat);
-        }
-        for (i = 101; i <= 120; ++i) {
-            Seat seat = new Seat(i, SeatType.disabled);
-            salaPalatului.addSeat(seat);
-        }
-        for (i = 121; i <= 130; ++i) {
-            Seat seat = new Seat(i, SeatType.exclusive);
-            salaPalatului.addSeat(seat);
-        }
+//        int i;
+//        for (i = 1; i <= 100; ++i) {
+//            Seat seat = new Seat(i, SeatType.normal);
+//            salaPalatului.addSeat(seat);
+//        }
+//        for (i = 101; i <= 120; ++i) {
+//            Seat seat = new Seat(i, SeatType.disabled);
+//            salaPalatului.addSeat(seat);
+//        }
+//        for (i = 121; i <= 130; ++i) {
+//            Seat seat = new Seat(i, SeatType.exclusive);
+//            salaPalatului.addSeat(seat);
+//        }
+//
+//        for (i = 1; i <= 100; ++i) {
+//            Seat seat = new Seat(i, SeatType.normal);
+//            areneleRomane.addSeat(seat);
+//        }
+//        for (i = 101; i <= 150; ++i) {
+//            Seat seat = new Seat(i, SeatType.exclusive);
+//            areneleRomane.addSeat(seat);
+//        }
 
-        for (i = 1; i <= 100; ++i) {
-            Seat seat = new Seat(i, SeatType.normal);
-            areneleRomane.addSeat(seat);
-        }
-        for (i = 101; i <= 150; ++i) {
-            Seat seat = new Seat(i, SeatType.exclusive);
-            areneleRomane.addSeat(seat);
-        }
-
-        Event concert = new Event(salaPalatului,
-                "Concert Metalica", "Concert de Metal organizat in Bucuresti" ,
-                organizer,
-                new Date(2024, Calendar.APRIL, 25, 20, 0),
-                new Date(2024, Calendar.APRIL, 25, 22, 0), 100);
-        Event conferintaJava = new Event(areneleRomane,
-                "Conferinta JAVA", "Conferinta academica dedicata limbajului Java",
-                organizer,
-                new Date(2024, Calendar.DECEMBER, 4, 12, 0),
-                new Date(2024, Calendar.DECEMBER, 6, 12, 0), 50);
-        ticketingService.addEvent(concert);
-        ticketingService.addEvent(conferintaJava);
+//        Event concert = new Event(salaPalatului,
+//                "Concert Metalica", "Concert de Metal organizat in Bucuresti" ,
+//                organizer,
+//                new Date(2024, Calendar.APRIL, 25, 20, 0),
+//                new Date(2024, Calendar.APRIL, 25, 22, 0), 100);
+//        Event conferintaJava = new Event(areneleRomane,
+//                "Conferinta JAVA", "Conferinta academica dedicata limbajului Java",
+//                organizer,
+//                new Date(2024, Calendar.DECEMBER, 4, 12, 0),
+//                new Date(2024, Calendar.DECEMBER, 6, 12, 0), 50);
+//        ticketingService.addEvent(concert);
+//        ticketingService.addEvent(conferintaJava);
     }
     public static void buyTicket(Client user, Event event) {
         double price = user.getTicketPrice(event.getSeatPrice());

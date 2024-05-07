@@ -35,6 +35,17 @@ public class ClientRepository {
         }
         return id;
     }
+    public void updateClient(Client client) {
+        try {
+            PreparedStatement stmt = db.prepareStatement("UPDATE clients SET nrPoints = " + client.getNrPoints() +
+                    " WHERE id = " + client.getId());
+            stmt.executeUpdate();
+            db.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     public Client lookupClient(int clientId) {
         Client user = null;
         try {

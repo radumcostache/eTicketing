@@ -9,17 +9,16 @@ public class Ticket {
     private Seat seat;
 
 
-    public Ticket(Event event, Client client, Seat seat) {
+    public Ticket(int id, Event event, Client client, Seat seat) {
         this.event = event;
         this.client = client;
         this.seat = seat;
-
-        id = ID_GENERATOR++;
+        this.id = id;
     }
 
     public HistoricalTicket cancelTicket() {
         this.event.addSeat(this.seat);
-        return new HistoricalTicket(this.event, this.client, this.seat);
+        return new HistoricalTicket(this.id, this.event, this.client, this.seat);
     }
 
     public int getId() {
